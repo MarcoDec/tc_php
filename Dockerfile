@@ -11,6 +11,7 @@ RUN apt install -y --no-install-recommends \
         docker.io \
         fontconfig \
         git \
+        gnupg2 \
         graphviz \
         libjpeg62-turbo \
         libpng-dev \
@@ -20,7 +21,6 @@ RUN apt install -y --no-install-recommends \
         libxrender1 \
         libzip-dev \
         locales \
-        nodejs \
         sudo \
         xfonts-75dpi \
         xfonts-base \
@@ -33,9 +33,6 @@ RUN apt install -y --no-install-recommends \
     wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh && \
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
-    ln -fs /var/www/html/sf4/.docker/php/.bash_aliases ~/.bash_aliases && \
-    ln -fs /var/www/html/sf4/.docker/php/.bashrc ~/.bashrc && \
-    ln -fs /var/www/html/sf4/.docker/php/.zshrc-root ~/.zshrc && \
     docker-php-ext-install \
         calendar \
         gd \
@@ -45,7 +42,10 @@ RUN apt install -y --no-install-recommends \
     wget https://get.symfony.com/cli/installer -O - | bash && \
     mv /root/.symfony/bin/symfony /usr/local/bin/symfony &&\
     rm -r /root/.symfony/ && \
-    curl https://www.npmjs.com/install.sh | sh && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt update && \
+    apt install -y yarn && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen && \
@@ -55,8 +55,4 @@ RUN apt install -y --no-install-recommends \
     apt upgrade -y --no-install-recommends && \
     apt autoclean -y && \
     apt autoremove -y && \
-    ln -fs /var/www/html/sf4/.docker/php/php.ini /usr/local/etc/php/php.ini && \
-    ln -fs /var/www/html/sf4/.docker/php/php-fpm.conf /usr/local/etc/php/php-fpm.conf && \
     echo 'root:root' | chpasswd # Mot de passe root : root
-
-WORKDIR /var/www/html

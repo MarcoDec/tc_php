@@ -10,9 +10,11 @@ RUN apt update && \
 RUN apt install -y --no-install-recommends \
         docker.io \
         fontconfig \
+        g++ \
         git \
         gnupg2 \
         graphviz \
+        libicu-dev \
         libjpeg62-turbo \
         libpng-dev \
         libx11-6 \
@@ -28,14 +30,17 @@ RUN apt install -y --no-install-recommends \
         unzip \
         wget \
         zsh \
-        zip && \
+        zip \
+        zlib1g-dev && \
     chsh -s /usr/bin/zsh root && \
     wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh && \
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
+    docker-php-ext-configure intl && \
     docker-php-ext-install \
         calendar \
         gd \
+        intl \
         pdo_mysql \
         zip && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \

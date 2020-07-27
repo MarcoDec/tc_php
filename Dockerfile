@@ -58,8 +58,8 @@ RUN apt install -y --no-install-recommends \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen && \
-    wget --no-check-certificate https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb && \
-    dpkg -i "wkhtmltox_0.12.5-1.stretch_amd64.deb" && \
+    wget --no-check-certificate https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.stretch_amd64.deb && \
+    dpkg -i "wkhtmltox_0.12.6-1.stretch_amd64.deb" && \
     apt-get -f install && \
     apt upgrade -y --no-install-recommends && \
     apt autoclean -y && \

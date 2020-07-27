@@ -16,13 +16,16 @@ RUN apt install -y --no-install-recommends \
         graphviz \
         libicu-dev \
         libjpeg62-turbo \
+        libmagickwand-dev \
         libpng-dev \
+        libreoffice \
         libx11-6 \
         libxcb1 \
         libxext6 \
         libxrender1 \
         libzip-dev \
         locales \
+        poppler-utils \
         sudo \
         xfonts-75dpi \
         xfonts-base \
@@ -32,6 +35,7 @@ RUN apt install -y --no-install-recommends \
         zsh \
         zip \
         zlib1g-dev && \
+    pecl install imagick && \
     chsh -s /usr/bin/zsh root && \
     wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh && \
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
@@ -54,8 +58,8 @@ RUN apt install -y --no-install-recommends \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen && \
-    wget --no-check-certificate https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb && \
-    dpkg -i "wkhtmltox_0.12.5-1.stretch_amd64.deb" && \
+    wget --no-check-certificate https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.stretch_amd64.deb && \
+    dpkg -i "wkhtmltox_0.12.6-1.stretch_amd64.deb" && \
     apt-get -f install && \
     apt upgrade -y --no-install-recommends && \
     apt autoclean -y && \

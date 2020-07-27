@@ -16,13 +16,16 @@ RUN apt install -y --no-install-recommends \
         graphviz \
         libicu-dev \
         libjpeg62-turbo \
+        libmagickwand-dev \
         libpng-dev \
+        libreoffice \
         libx11-6 \
         libxcb1 \
         libxext6 \
         libxrender1 \
         libzip-dev \
         locales \
+        poppler-utils \
         sudo \
         xfonts-75dpi \
         xfonts-base \
@@ -32,6 +35,7 @@ RUN apt install -y --no-install-recommends \
         zsh \
         zip \
         zlib1g-dev && \
+    pecl install imagick && \
     chsh -s /usr/bin/zsh root && \
     wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh && \
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \

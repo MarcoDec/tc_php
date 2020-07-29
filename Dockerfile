@@ -8,6 +8,7 @@ RUN apt update && \
     apt install -y --no-install-recommends apt-utils debconf
 
 RUN apt install -y --no-install-recommends \
+        cron \
         docker.io \
         fontconfig \
         g++ \
@@ -65,3 +66,5 @@ RUN apt install -y --no-install-recommends \
     apt autoclean -y && \
     apt autoremove -y && \
     echo 'root:root' | chpasswd # Mot de passe root : root
+
+ADD entrypoint.sh /usr/local/bin/docker-php-entrypoint

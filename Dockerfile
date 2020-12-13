@@ -9,7 +9,7 @@ RUN apt update && \
 
 RUN apt install -y --no-install-recommends \
         cron \
-        docker.io \
+        cups-client \
         fontconfig \
         g++ \
         git \

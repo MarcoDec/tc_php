@@ -52,10 +52,9 @@ RUN apt install -y --no-install-recommends \
     wget https://get.symfony.com/cli/installer -O - | bash && \
     mv /root/.symfony/bin/symfony /usr/local/bin/symfony &&\
     rm -r /root/.symfony/ && \
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt update && \
-    apt install -y yarn && \
+    curl -fsSL https://deb.nodesource.com/setup_current.x | bash - && \
+    apt install -y nodejs && \
+    npm install -g yarn && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen && \
